@@ -85,7 +85,9 @@
     "build",
     "coverage",
     "metro.config.js",
-    "*.js"
+    "*.js",
+    "vite.config.ts",
+    "tsconfig*"
   ],
   "settings": {
     "react": {
