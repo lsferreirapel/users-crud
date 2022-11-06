@@ -14,7 +14,30 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@assets/*": [
+        "./src/common/assets/*"
+      ],
+      "@common/*": [
+        "./src/common/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@atomic/*": [
+        "./src/atomic/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@src/*": [
+        "./src/*"
+      ],
+      "@root/*": [
+        "./*"
+      ]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
