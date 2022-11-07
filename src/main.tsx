@@ -2,6 +2,7 @@ import React from "react";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { ToastContainer } from "@common/utils/toast";
+import { AuthProvider } from "@services/auth/AuthContext";
 import { queryClient } from "@services/client/config";
 import ReactDOM from "react-dom/client";
 import { QueryClientProvider } from "react-query";
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <ChakraProvider theme={theme}>
       <Router>
         <QueryClientProvider client={queryClient}>
-      <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
           <ToastContainer />
         </QueryClientProvider>
       </Router>
