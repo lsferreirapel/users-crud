@@ -1,6 +1,7 @@
 import { ChakraTheme, extendTheme } from "@chakra-ui/react";
 
 import { colors } from "./colors";
+import { spacing } from "./spacing";
 import { typography } from "./typography";
 
 export const theme = extendTheme({
@@ -10,11 +11,12 @@ export const theme = extendTheme({
   },
   ...typography,
   ...colors,
+  ...spacing,
   styles: {
     global: {
-      background: "background",
+      background: "background2",
       body: {
-        background: "background",
+        background: "background2",
       },
     },
   },
