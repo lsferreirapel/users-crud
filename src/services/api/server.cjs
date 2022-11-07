@@ -19,6 +19,7 @@ const errors = {
   INVALID_AUTHORIZATION_FORMAT: "INVALID_AUTHORIZATION_FORMAT",
   INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
   FORBIDDEN_RESOURCE: "FORBIDDEN_RESOURCE",
+  USER_NOT_FOUND: "USER_NOT_FOUND",
 };
 
 function encodePassword(password) {
@@ -60,8 +61,37 @@ server.post("/auth/login", (req, res) => {
     const message = errors.INVALID_CREDENTIALS;
     return res.status(status).json({ status, message });
   }
-  const access_token = createToken({ email, role: authenticatedUser.role });
+  const access_token = createToken({
+    id: authenticatedUser.id,
+    email,
+    role: authenticatedUser.role,
+  });
   res.status(200).json({ access_token });
+});
+
+// Get usuar that make the request
+server.get("/me", (req, res) => {
+  try {
+    const verifyTokenResult = verifyToken(
+      req.headers.authorization.split(" ")[1]
+    );
+
+    const foundUser = dbFile.users.find(
+      (user) => user.id === verifyTokenResult.id
+    );
+
+    if (!foundUser) {
+      const status = 404;
+      const message = errors.USER_NOT_FOUND;
+      return res.status(status).json({ status, message });
+    }
+
+    return res.status(200).json(foundUser);
+  } catch (error) {
+    const status = 401;
+    const message = errors.REVOKED_ACCESS_TOKEN;
+    res.status(status).json({ status, message });
+  }
 });
 
 // Middleware to validate access_token
