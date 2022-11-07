@@ -31,7 +31,5 @@ export function createColorModeSemanticToken(
     };
   }
 
-  console.log(semanticTokens);
-
   return semanticTokens;
 }
