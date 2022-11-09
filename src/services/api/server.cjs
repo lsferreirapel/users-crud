@@ -122,17 +122,37 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
   }
 });
 
+// Middleware to exclude password from get requests
+server.use((req, res, next) => {
+  if (req.method === "GET") {
+    const oldSend = res.send;
+    res.send = (data) => {
+      const dataObj = JSON.parse(data);
+
+      if (Array.isArray(dataObj)) {
+        dataObj.forEach((item) => delete item?.password);
+      } else {
+        delete dataObj?.password;
+      }
+      data = JSON.stringify(dataObj);
+
+      res.send = oldSend;
+      return res.send(data);
+    };
+  }
+  next();
+});
+
 // Middleware to encode password
 server.use(/\/users(\/.*)?/, (req, res, next) => {
   if (req.method === "POST" || req.method === "PUT" || req.method === "PATCH") {
-    const password = encodePassword(req.body.password);
+    if (!!req?.body?.password) {
+      const password = encodePassword(req.body.password);
 
-    if (password) {
-      req.body.password = password;
+      if (password) {
+        req.body.password = password;
+      }
     }
-
-    next();
-    return;
   }
   next();
 });
