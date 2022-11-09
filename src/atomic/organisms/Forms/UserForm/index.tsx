@@ -76,11 +76,13 @@ export function UserForm({
             name="firstName"
             label="Nome"
             placeholder="Digite seu nome aqui"
+            isRequired={type === "CREATE"}
           />
           <TextField
             name="lastName"
             label="Sobrenome"
             placeholder="Digite seu sobrenome aqui"
+            isRequired={type === "CREATE"}
           />
         </Flex>
         <MaskField
@@ -89,11 +91,13 @@ export function UserForm({
           mask="999.999.999-99"
           alwaysShowMask
           placeholder="Digite seu cpf aqui"
+          isRequired={type === "CREATE"}
         />
         <TextField
           name="email"
           label="Email"
           placeholder="Digite seu email aqui"
+          isRequired={type === "CREATE"}
         />
         <TextField
           isDisabled={type === "EDIT"}
@@ -101,8 +105,13 @@ export function UserForm({
           type="password"
           label="Senha"
           placeholder="Digite sua senha aqui"
+          isRequired={type === "CREATE"}
         />
-        <DateField name="birthDate" label="Data de nascimento" />
+        <DateField
+          name="birthDate"
+          label="Data de nascimento"
+          isRequired={type === "CREATE"}
+        />
         <CheckboxField name="isAdmin" label="Administrador" />
       </FormProvider>
     </Drawer>

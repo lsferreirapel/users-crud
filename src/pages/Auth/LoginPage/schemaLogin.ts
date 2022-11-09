@@ -6,6 +6,6 @@ export interface ILoginFormValues {
 }
 
 export const schemaLogin = Yup.object().shape({
-  email: Yup.string().label("email").email().required(),
-  password: Yup.string().label("senha").required().min(6),
+  email: Yup.string().label("email").email().trim().required(),
+  password: Yup.string().label("senha").trim().required(),
 });
