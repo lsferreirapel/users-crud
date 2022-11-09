@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "node ./src/services/api/server.cjs --watch",
     "server": "node ./src/services/api/server.cjs --watch",
+    "build": "tsc && vite build",
     "dev": "vite",
     "preview": "vite preview"
   },
