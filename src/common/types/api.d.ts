@@ -14,7 +14,6 @@ export interface IUser {
   birthDate: string;
   email: string;
   document: string;
-  password: string;
   role: Role;
 }
 
@@ -26,3 +25,14 @@ export interface ILoginVariables {
 export interface ILoginResponse {
   access_token: string;
 }
+
+// POST - /users
+export type ICreateUserVariables = { password: string } & Omit<IUser, "id">;
+export type ICreateUserResponse = IUser;
+
+// PUT - /users/:id
+export type IUpdateUserVariables = {
+  id: IUser["id"];
+  update: Partial<ICreateUserVariables>;
+};
+export type IUpdateUserResponse = IUser;

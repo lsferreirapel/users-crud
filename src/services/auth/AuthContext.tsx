@@ -2,7 +2,8 @@ import React, { PropsWithChildren } from "react";
 import { createContext, useCallback, useContext } from "react";
 
 import { useCustomMutation } from "@common/hooks/useCustomMutation";
-import { ILoginResponse, ILoginVariables } from "@common/types/api";
+import { useCustomQuery } from "@common/hooks/useCustomQuery";
+import { ILoginVariables, IUser } from "@common/types/api";
 import { queryClient } from "@services/client/config";
 import { removeCookie, setCookie } from "@src/common/utils/cookies";
 import {
@@ -11,27 +12,29 @@ import {
 } from "@src/common/utils/toast";
 import { useNavigate } from "react-router-dom";
 
-import { postLogin } from "./auth";
+import { fetchMe, postLogin } from "./auth";
 
 type AuthContextType = {
   login(props: ILoginVariables): Promise<void>;
   isLoading?: boolean;
   logout(): void;
+  me?: IUser;
 };
 
 const AuthContext = createContext<AuthContextType>({
   login: async () => undefined,
   isLoading: false,
   logout: () => undefined,
+  me: undefined,
 });
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const navigate = useNavigate();
 
-  const { mutate: loginMutation, isLoading } = useCustomMutation<
-    ILoginResponse,
-    ILoginVariables
-  >(postLogin, {
+  const { data } = useCustomQuery("me", fetchMe);
+  const me = data?.data;
+
+  const { mutate: loginMutation, isLoading } = useCustomMutation(postLogin, {
     onError(error) {
       handleAPIErrorWithToast(error);
     },
@@ -62,6 +65,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         login,
         logout,
         isLoading,
+        me,
       }}
     >
       {children}

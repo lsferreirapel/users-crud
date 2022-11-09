@@ -14,8 +14,6 @@ export async function fetchMe() {
 }
 
 // POST
-export async function postLogin(props: ILoginVariables) {
-  return await axiosClient.post<ILoginResponse>("/auth/login", {
-    ...props,
-  });
+export async function postLogin(variables: ILoginVariables) {
+  return await axiosClient.post<ILoginResponse>("/auth/login", variables);
 }
