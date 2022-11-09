@@ -48,10 +48,15 @@ export function UsersPage() {
     },
   });
 
-  const { data: usersData, onSearch } = useCustomPaginatedQuery<IUser[]>(
-    "users",
-    fetchUsers
-  );
+  const {
+    data: usersData,
+    onSearch,
+    page,
+    nextPage,
+    prevPage,
+    hasNext,
+    hasPrev,
+  } = useCustomPaginatedQuery<IUser[]>("users", fetchUsers);
 
   const { mutate: createUserMutation } = useCustomMutation(createUser, {
     onError(error) {
@@ -135,6 +140,13 @@ export function UsersPage() {
         columns={columns}
         data={data}
         disableMoreOptions={me?.role !== "ADMIN"}
+        paginationProps={{
+          page,
+          nextPage,
+          prevPage,
+          hasNext,
+          hasPrev,
+        }}
         searchProps={{
           onChange: debounce(
             (e: any) => onSearch(e?.target?.value?.trim()),

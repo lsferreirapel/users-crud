@@ -29,6 +29,7 @@ export function useCustomPaginatedQuery<T>(
   >(`${queryKey}`, () => queryFn({ limit, page, search }), options);
 
   const onSearch = useCallback((value: string) => {
+    setPage(1);
     setSearch(value);
   }, []);
 
@@ -40,10 +41,27 @@ export function useCustomPaginatedQuery<T>(
     setPage((state) => state - 1);
   }, []);
 
+  const totalCount = (data as any)?.data?.headers?.get?.("X-Total-Count")
+    ? +(data as any).data.headers.get("X-Total-Count")
+    : 0;
+
+  const hasNext = totalCount > page * limit;
+  const hasPrev = page > 1;
+
   useEffect(() => {
     data.refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, page]);
 
-  return { ...data, onSearch, nextPage, prevPage };
+  return {
+    ...data,
+    onSearch,
+    nextPage,
+    prevPage,
+    page,
+    limit,
+    totalCount,
+    hasNext,
+    hasPrev,
+  };
 }

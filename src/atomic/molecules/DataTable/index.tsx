@@ -1,6 +1,10 @@
 import * as React from "react";
 
 import { TableActions, TableActionsProps } from "@atomic/atoms/TableActions";
+import {
+  TablePagination,
+  TablePaginationProps,
+} from "@atomic/atoms/TablePagination";
 import { Icon, TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -32,6 +36,7 @@ export type DataTableProps<Data> = {
   onDelete?: TableActionsProps["onDelete"];
   searchProps?: InputProps;
   disableMoreOptions?: boolean;
+  paginationProps?: TablePaginationProps;
 };
 
 export function DataTable<Data extends object>({
@@ -41,6 +46,7 @@ export function DataTable<Data extends object>({
   onDelete,
   searchProps,
   disableMoreOptions,
+  paginationProps,
 }: DataTableProps<Data>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
@@ -131,7 +137,12 @@ export function DataTable<Data extends object>({
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <Flex key={cell.id}>
-                        <Text textStyle="Headline.Regular" color="title">
+                        <Text
+                          textStyle="Headline.Regular"
+                          color="title"
+                          wordBreak="break-word"
+                          w="90%"
+                        >
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
@@ -154,6 +165,7 @@ export function DataTable<Data extends object>({
             );
           })}
         </Flex>
+        {paginationProps && <TablePagination {...paginationProps} />}
       </Flex>
     </Flex>
   );

@@ -36,3 +36,13 @@ export function objectToURLParams(obj: Record<string, any>) {
     }).toString()
   );
 }
+
+export function reduceString(
+  str: string,
+  size = 25,
+  obfuscationCharacter = "..."
+) {
+  if (!str) return null;
+  if (str?.length <= size) return str;
+  return str.slice(0, size - 3) + obfuscationCharacter;
+}
