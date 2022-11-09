@@ -5,6 +5,9 @@ const baseURL = "http://localhost:4000";
 
 export const axiosClient = axios.create({
   baseURL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 export const queryClient = new QueryClient({

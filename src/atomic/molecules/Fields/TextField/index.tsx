@@ -40,13 +40,7 @@ export function TextField({
   const [showPassword, setShowPassword] = useBoolean();
 
   return (
-    <FormControl
-      isRequired={true}
-      mb="4"
-      {...props}
-      id={name}
-      isInvalid={!!(isTouched && error)}
-    >
+    <FormControl mb="2" {...props} id={name} isInvalid={!!(isTouched && error)}>
       {label && (
         <FormLabel ml="2" mb="1" display="flex">
           <Text textStyle="Headline.Bold" color="title">

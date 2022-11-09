@@ -33,6 +33,8 @@ export function LoginPage() {
           name="email"
           label="Email"
           placeholder="Digite seu email aqui"
+          mb="4"
+          isRequired
         />
         <TextField
           name="password"
@@ -40,6 +42,7 @@ export function LoginPage() {
           label="Senha"
           placeholder="Digite sua senha aqui"
           mb="1"
+          isRequired
         />
         <Link
           display="flex"
