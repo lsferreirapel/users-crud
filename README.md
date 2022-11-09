@@ -2,8 +2,24 @@
 
 Projeto web desenvolvido em `React` utilizando `Vite`.
 
-## Dependências
+## Acesso e Credenciais
+### [Acesse a aplicação aqui!](https://users-crud.onrender.com)
 
+
+```
+# ADMIN
+email: lucas@gmail.com
+senha: 123456 
+```
+```
+# USUARIO
+email: dpinner2@virginia.edu
+senha: 123456 
+```
+>Todas as credenciais podem ser obtidas no caminho [`/src/services/api/db.json`](https://github.com/lsferreirapel/users-crud/blob/main/src/services/api/db.json)   
+A senha utilizada nessas contas é `123456` 
+
+## Dependências
 - **Design** - [`Chakra-UI`](https://chakra-ui.com/)
 - **Roteamento** - [React Router dom](https://v5.reactrouter.com/web/guides/quick-start)
 - **Estados** - React Context, [`js-cookie`](https://www.npmjs.com/package/js-cookie)
@@ -23,8 +39,9 @@ Projeto web desenvolvido em `React` utilizando `Vite`.
   # Entra no diretório do projeto
   cd users-crud
 ```
+ Crie um arquivo `.env` na pasta root do projeto e   adicione as variaveis de ambiente informadas no arquivo `.env.example`
 
-### Utilizando Yarn
+>### Utilizando Yarn
 ```bash
   # Instala as dependencias do projeto
   yarn install
@@ -42,7 +59,7 @@ Projeto web desenvolvido em `React` utilizando `Vite`.
 
 
 
-### Utilizando npm
+>### Utilizando npm
 ```bash
   # Instala as dependencias do projeto
   npm install
@@ -60,7 +77,7 @@ Projeto web desenvolvido em `React` utilizando `Vite`.
 
 
 
-# Estrutura de pastas
+## Estrutura de pastas
 ```
 src - ROOT                
 ├── atomic/          - Agrupa componentes da aplicação em uma estrutura atomic
@@ -93,10 +110,11 @@ src - ROOT
 └── main.tsx    
 ```
 
-# TODOs
-- [] Refatorar configuração do`json-server` para permitir que usuários com a role USER
-     possam editar seu próprio usuário.
+## TODOs
+-  Refatorar API para permitir que usuários   
+   com a role USER possam editar seu próprio usuário.
 
+-  Refatorar API para permitir que upload de imagens   
 
 ## License
 
