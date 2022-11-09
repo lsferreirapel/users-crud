@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "server": "node ./src/services/api/server.cjs --watch",
-    "dev": "vite",
     "build": "tsc && vite build",
+    "dev": "vite",
     "preview": "vite preview"
   },
   "dependencies": {
