@@ -46,6 +46,7 @@
         "extensions": [".tsx"]
       }
     ],
+    "@typescript-eslint/no-explicit-any": "off",
     "react/jsx-props-no-spreading": ["off"],
     "react/jsx-fragments": "off",
     "react/jsx-wrap-multilines": "off",
