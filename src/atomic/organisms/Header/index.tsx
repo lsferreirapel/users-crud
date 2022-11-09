@@ -11,6 +11,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { HEADER_HEIGHT } from "@common/constants";
 import { IUser } from "@common/types/api";
@@ -20,6 +21,8 @@ import { useAuth } from "@services/auth/AuthContext";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
+import { MenuBar } from "../SideBar/MenuBar";
+
 type HeaderProps = {
   user?: IUser;
 };
@@ -28,6 +31,8 @@ export function Header({ user }: HeaderProps) {
   const { logout } = useAuth();
 
   const navigate = useNavigate();
+
+  const enableHamburgerMenu = useBreakpointValue({ base: true, lg: false });
 
   return (
     <Flex
@@ -42,13 +47,17 @@ export function Header({ user }: HeaderProps) {
       justifyContent="space-between"
       px="4"
     >
-      <Text
-        textStyle="Heading.H5-Bold"
-        fontSize={{ base: "lg", lg: "2xl" }}
-        color="title"
-      >
-        CRUD de usuários
-      </Text>
+      <Flex alignItems="center" gap="2">
+        {enableHamburgerMenu && <MenuBar />}
+        <Text
+          textStyle="Heading.H5-Bold"
+          display={{ base: "none", sm: "flex" }}
+          fontSize={{ base: "lg", lg: "2xl" }}
+          color="title"
+        >
+          CRUD de usuários
+        </Text>
+      </Flex>
       <Flex gap="1">
         <ToogleModeButton />
         <Menu>
